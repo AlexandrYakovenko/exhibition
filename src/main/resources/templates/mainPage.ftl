@@ -4,6 +4,7 @@
 <@p.page>
 <div>
     <@logout.logut/>
+    <span><a href="/user">User List</a> </span>
 </div>
     <form action="/main" method="post">
         <input type="text" name="name" placeholder="name of exhibition">

@@ -3,7 +3,6 @@
 
 <@p.page>
 Add new user
-${message}
 
 <@registration.inputData "/registration" true/>
 
