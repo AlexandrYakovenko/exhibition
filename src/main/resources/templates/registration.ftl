@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Spring Security Example </title>
-</head>
-<body>
+<#import "parts/page.ftl" as p>
+<#import "parts/inputData.ftl" as registration>
+
+<@p.page>
 Add new user
-<#if user??>
-    ${message}
-</#if>
-<form action="/registration" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password : <input type="password" name="password"/> </label></div>
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-</body>
-</html>
+${message}
+
+<@registration.inputData "/registration" true/>
+
+</@p.page>

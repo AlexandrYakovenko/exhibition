@@ -1,10 +1,9 @@
-<html>
-<body>
+<#import "parts/page.ftl" as p>
+<#import "parts/logut.ftl" as logout>
+
+<@p.page>
 <div>
-    <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-        <input type="submit" value="Sign Out"/>
-    </form>
+    <@logout.logut/>
 </div>
     <form action="/main" method="post">
         <input type="text" name="name" placeholder="name of exhibition">
@@ -12,9 +11,8 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <button type="submit">Submit</button>
     </form>
-    <form method="post" action="filter">
-        <input type="text" name="showroom" placeholder="showroom">
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    <form method="get" action="main">
+        <input type="text" name="showroom" value=${showroom}>
         <button type="submit">Submit</button>
     </form>
 <div>
@@ -29,5 +27,5 @@
         No Message
     </#if>
 </div>
-</body>
-</html>
+
+</@p.page>

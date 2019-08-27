@@ -28,11 +28,21 @@ public class MainController {
 
     @GetMapping("/main")
     public String mainForm(
+            @RequestParam(required = false, defaultValue = "") String showroom,
             Model model
     ){
-        List<Exhibition> exhibitions = exhibitionService.findAll();
+        List<Exhibition> exhibitions;
+
+        if(!showroom.isEmpty()) {
+            exhibitions =
+                    exhibitionService.findByShowroom(showroom);
+        } else {
+            exhibitions =
+                    exhibitionService.findAll();
+        }
 
         model.addAttribute("exhibitions", exhibitions);
+        model.addAttribute("showroom", showroom);
 
         return "mainPage";
     }
@@ -52,25 +62,4 @@ public class MainController {
 
         return "mainPage";
     }
-
-    @PostMapping("/filter")
-    public String filter(
-            @RequestParam String showroom,
-            Model model
-    ) {
-        List<Exhibition> exhibitions;
-
-        if(!showroom.isEmpty()) {
-           exhibitions =
-                    exhibitionService.findByShowroom(showroom);
-        } else {
-            exhibitions =
-                    exhibitionService.findAll();
-        }
-
-        model.addAttribute("exhibitions", exhibitions);
-
-        return "mainPage";
-    }
-
 }
