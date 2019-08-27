@@ -2,12 +2,14 @@ package ua.yakovenko.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.yakovenko.domain.Exhibition;
+import ua.yakovenko.domain.User;
 import ua.yakovenko.service.ExhibitionService;
 
 import java.util.List;
@@ -21,27 +23,28 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage() {
-        return "mainPage";
+        return "home";
     }
 
-    @GetMapping()
+    @GetMapping("/main")
     public String mainForm(
             Model model
     ){
-        Optional<List<Exhibition>>  exhibitions = exhibitionService.findAll();
+        List<Exhibition> exhibitions = exhibitionService.findAll();
 
         model.addAttribute("exhibitions", exhibitions);
 
         return "mainPage";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(
+            @AuthenticationPrincipal User user,
             @RequestParam String name,
             @RequestParam String showroom,
             Model model
     ) {
-        Exhibition exhibition = new Exhibition(name, showroom);
+        Exhibition exhibition = new Exhibition(name, showroom, user);
 
         exhibitionService.save(exhibition);
 
@@ -50,12 +53,12 @@ public class MainController {
         return "mainPage";
     }
 
-    @PostMapping("filter")
+    @PostMapping("/filter")
     public String filter(
             @RequestParam String showroom,
             Model model
     ) {
-        Optional<List<Exhibition>> exhibitions;
+        List<Exhibition> exhibitions;
 
         if(!showroom.isEmpty()) {
            exhibitions =
@@ -65,7 +68,7 @@ public class MainController {
                     exhibitionService.findAll();
         }
 
-        model.addAttribute("exhibitions", exhibitions.get());
+        model.addAttribute("exhibitions", exhibitions);
 
         return "mainPage";
     }

@@ -17,11 +17,11 @@ public class ExhibitionService {
         exhibitionRepository.save(exhibition);
     }
 
-    public Optional<List<Exhibition>> findAll() {
-        return Optional.of(exhibitionRepository.findAll());
+    public List<Exhibition> findAll() {
+        return exhibitionRepository.findAll();
     }
 
-    public Optional<List<Exhibition>> findByShowroom(String showroom) {
-        return Optional.of(exhibitionRepository.findByShowroom(showroom));
+    public List<Exhibition> findByShowroom(String showroom) {
+        return exhibitionRepository.findByShowroom(showroom);
     }
 }
