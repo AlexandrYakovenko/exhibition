@@ -2,10 +2,6 @@
 <#import "parts/logut.ftl" as logout>
 
 <@p.page>
-<div>
-    <@logout.logut/>
-    <span><a href="/user">User List</a> </span>
-</div>
     <form action="/main" method="post">
         <input type="text" name="name" placeholder="name of exhibition">
         <input type="text" name="showroom" placeholder="name of showroom">

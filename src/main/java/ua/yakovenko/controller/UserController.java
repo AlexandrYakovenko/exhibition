@@ -5,14 +5,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import ua.yakovenko.domain.Role;
 import ua.yakovenko.domain.User;
 import ua.yakovenko.service.UserService;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -26,6 +24,7 @@ public class UserController {
             Model model
     ) {
         model.addAttribute("users", userService.findAll());
+
         return "userList";
     }
 

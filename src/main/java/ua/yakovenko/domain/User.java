@@ -26,6 +26,15 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    public boolean isAdmin() {
+        return roles.contains(Role.ADMIN);
+    }
+
+    public boolean isSuperAdmin() {
+        return roles.contains(Role.SUPER_ADMIN);
+    }
+
+
     @Override
     public boolean isAccountNonExpired() { return true; }
 
@@ -40,5 +49,4 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { return getRoles(); }
-
 }

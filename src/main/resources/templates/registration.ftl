@@ -2,7 +2,8 @@
 <#import "parts/inputData.ftl" as registration>
 
 <@p.page>
-Add new user
+
+<div class="mb-1">Add new user</div>
 
 <@registration.inputData "/registration" true/>
 

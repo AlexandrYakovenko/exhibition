@@ -1,6 +1,5 @@
 <#import "parts/page.ftl" as p>
 
 <@p.page>
-<div>Hello, guest!</div>
-<a href="/main">Main Page</a>
+<h5>Hello, guest!</h5>
 </@p.page>
