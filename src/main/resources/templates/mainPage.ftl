@@ -47,7 +47,7 @@
                     <div class="card-body">
                             <h5 class="card-title">${exhibition.name}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">${exhibition.showroom}</h6>
-                            <#--<p class="card-text">${exhibition.description}</p><br/>-->
+                            <p class="card-text">${exhibition.description}</p><br/>
                             <a href="/buyTicket" class="card-link">Buy Ticket</a>
                     </div>
                     <div class="card-footer text-muted">

@@ -52,9 +52,10 @@ public class MainController {
             @AuthenticationPrincipal User user,
             @RequestParam String name,
             @RequestParam String showroom,
+            @RequestParam String description,
             Model model
     ) {
-        Exhibition exhibition = new Exhibition(name, showroom, user);
+        Exhibition exhibition = new Exhibition(name, showroom, description, user);
 
         exhibitionService.save(exhibition);
 

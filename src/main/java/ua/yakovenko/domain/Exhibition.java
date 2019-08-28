@@ -20,6 +20,9 @@ public class Exhibition {
     private String showroom;
 
     @NonNull
+    private String description;
+
+    @NonNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
