@@ -20,6 +20,8 @@ public class User implements UserDetails {
     private String password;
     private Long accountMoney;
     private boolean active;
+    private String email;
+    private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -33,7 +35,6 @@ public class User implements UserDetails {
     public boolean isSuperAdmin() {
         return roles.contains(Role.SUPER_ADMIN);
     }
-
 
     @Override
     public boolean isAccountNonExpired() { return true; }

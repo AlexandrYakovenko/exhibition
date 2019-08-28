@@ -2,5 +2,9 @@
 <#import "parts/inputData.ftl" as login>
 
 <@p.page>
-<@login.inputData "/login" false/>
+
+    ${message!}
+
+    <@login.inputData "/login" false/>
+
 </@p.page>

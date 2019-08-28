@@ -6,7 +6,6 @@ import ua.yakovenko.domain.Exhibition;
 import ua.yakovenko.repository.ExhibitionRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExhibitionService {

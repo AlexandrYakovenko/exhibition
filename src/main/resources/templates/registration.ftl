@@ -3,7 +3,7 @@
 
 <@p.page>
 
-<div class="mb-1">Add new user</div>
+<div class="mb-1">Add new user. ${message!}</div>
 
 <@registration.inputData "/registration" true/>
 
