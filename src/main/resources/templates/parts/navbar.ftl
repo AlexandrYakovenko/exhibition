@@ -12,6 +12,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/main">Exhibitions</a>
             </li>
+            <#if user??>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/profile">Profile</a>
+                </li>
+            </#if>
             <#if isSuperAdmin>
                 <li class="nav-item">
                     <a class="nav-link" href="/user">User List</a>
