@@ -32,7 +32,7 @@ public class RegistrationController {
     ) {
         if (!registrationService.addUser(user)) {
             model.addAttribute("message", "User is exists!");
-            
+
             return "/registration";
         }
 
