@@ -22,7 +22,7 @@
                      <div class="form-group">
                         <label for="exhibition">Exhibition</label>
                          <input type="text" name="name" class="form-control ${(nameError??)?string('is-invalid', '')}"
-                                id="exhibition" value="<#if exhibition??>${exhibition.name}</#if>" placeholder="name of exhibition">
+                                id="exhibition" value="<#if exhibition??>${exhibition.name}</#if>" placeholder="name of exhibition"/>
                         <#if nameError??>
                             <div class="invalid-feedback">
                                 ${nameError}
@@ -34,7 +34,7 @@
                      <div class="form-group">
                          <label for="showroom">Showroom</label>
                          <input type="text" name="showroom" class="form-control ${(showroomError??)?string('is-invalid', '')}"
-                                id="showroom" value="<#if exhibition??>${exhibition.showroom}</#if>" placeholder="name of showroom">
+                                id="showroom" value="<#if exhibition??>${exhibition.showroom}</#if>" placeholder="name of showroom"/>
                          <#if showroomError??>
                                 <div class="invalid-feedback">
                                     ${showroomError}
@@ -46,7 +46,7 @@
                      <div class="form-group">
                          <label for="description">Description</label>
                         <input type="text" name="description" class="form-control ${(descriptionError??)?string('is-invalid', '')}"
-                               id="description" value="<#if exhibition??>${exhibition.description}</#if>" placeholder="description of event">
+                               id="description" value="<#if exhibition??>${exhibition.description}</#if>" placeholder="description of event"/>
                         <#if descriptionError??>
                                     <div class="invalid-feedback">
                                         ${descriptionError}
