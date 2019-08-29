@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.yakovenko.domain.Role.*;
 import ua.yakovenko.domain.User;
+import ua.yakovenko.service.RegistrationService;
 import ua.yakovenko.service.UserService;
 
 import java.util.Collections;
@@ -17,7 +18,7 @@ import static ua.yakovenko.domain.Role.USER;
 @Controller
 public class RegistrationController {
     @Autowired
-    private UserService userService;
+    private RegistrationService registrationService;
 
     @GetMapping("/registration")
     public String registration() {
@@ -29,18 +30,11 @@ public class RegistrationController {
             User user,
             Model model
     ) {
-        User userFromDb = userService.findByUsername(user.getUsername());
-
-        if (userFromDb != null) {
+        if (!registrationService.addUser(user)) {
             model.addAttribute("message", "User is exists!");
+            
             return "/registration";
         }
-
-        user.setActive(true);
-        user.setAccountMoney(0L);
-        user.setRoles(Collections.singleton(USER));
-
-        userService.save(user);
 
         return "redirect:/login";
     }
