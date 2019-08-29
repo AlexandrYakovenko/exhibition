@@ -8,8 +8,7 @@ import ua.yakovenko.repository.UserRepository;
 
 import java.util.Collections;
 
-import static ua.yakovenko.domain.Role.SUPER_ADMIN;
-import static ua.yakovenko.domain.Role.USER;
+import static ua.yakovenko.domain.Role.*;
 
 @Service
 public class RegistrationService {
