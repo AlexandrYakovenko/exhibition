@@ -29,8 +29,8 @@
         </div>
     </div>
 
-    <!-- Password  Confirmation-->
     <#if isRegisterForm>
+    <!-- Password  Confirmation-->
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Password :</label>
             <div class="col-sm-6">
@@ -42,6 +42,16 @@
                     </div>
                  </#if>
             </div>
+        </div>
+
+    <!-- reCaptcha-->
+        <div class="col-sm-6">
+            <div class="g-recaptcha" data-sitekey="6LdXr7QUAAAAAIpZ4oi0pn4jH65MMb_HcSH4vFIS"></div>
+            <#if captchaError??>
+                <div class="alert alert-danger" role="alert">
+                    ${captchaError}
+                </div>
+            </#if>
         </div>
     </#if>
 
