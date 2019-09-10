@@ -1,7 +1,7 @@
 <#include "security.ftl">
 <#import "logut.ftl" as logout>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,10 @@
             </#if>
         </ul>
 
+
         <div class="navbar-text mr-3"><#if user??>${name}<#else>Please, login</#if></div>
+        <a class="btn btn-info mr-1" href="/?lang=ua">UK</a>
+        <a class="btn btn-info mr-3" href="/?lang=en">EN</a>
         <@logout.logut/>
     </div>
 </nav>
