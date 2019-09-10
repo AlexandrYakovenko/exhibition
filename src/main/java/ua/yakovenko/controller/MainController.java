@@ -1,6 +1,10 @@
 package ua.yakovenko.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +17,6 @@ import ua.yakovenko.domain.User;
 import ua.yakovenko.service.ExhibitionService;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -29,19 +32,21 @@ public class MainController {
     @GetMapping("/main")
     public String mainForm(
             @RequestParam(required = false, defaultValue = "") String showroom,
-            Model model
+            Model model,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ){
-        List<Exhibition> exhibitions;
+        Page<Exhibition> page;
 
         if(!showroom.isEmpty()) {
-            exhibitions =
-                    exhibitionService.findByShowroom(showroom);
+            page =
+                    exhibitionService.findByShowroom(showroom, pageable);
         } else {
-            exhibitions =
-                    exhibitionService.findAll();
+            page =
+                    exhibitionService.findAll(pageable);
         }
 
-        model.addAttribute("exhibitions", exhibitions);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/main");
         model.addAttribute("showroom", showroom);
 
         return "mainPage";
@@ -52,7 +57,8 @@ public class MainController {
             @AuthenticationPrincipal User user,
             @Valid Exhibition exhibition,
             BindingResult bindingResult,
-            Model model
+            Model model,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
         exhibition.setAuthor(user);
 
@@ -66,7 +72,8 @@ public class MainController {
             exhibitionService.save(exhibition);
         }
 
-        model.addAttribute("exhibitions", exhibitionService.findAll());
+        model.addAttribute("url", "/main");
+        model.addAttribute("page", exhibitionService.findAll(pageable));
 
         return "mainPage";
     }
