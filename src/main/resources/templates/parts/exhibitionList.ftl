@@ -1,7 +1,7 @@
 <#include "security.ftl">
 <#import "pager.ftl" as p>
 
-
+<#if page??>
         <div class="card-columns mt-3">
             <#list page.content as exhibition>
                 <div class="card">
@@ -22,5 +22,6 @@
                 </div>
             </#list>
         </div>
+</#if>
 
 <@p.pager url page/>

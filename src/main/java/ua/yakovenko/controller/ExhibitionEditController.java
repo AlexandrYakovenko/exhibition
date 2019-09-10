@@ -1,6 +1,9 @@
 package ua.yakovenko.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,17 +28,20 @@ public class ExhibitionEditController {
         @AuthenticationPrincipal User currentUser,
         @PathVariable User user,
         Model model,
-        @RequestParam(required = false) Exhibition exhibition
+        @RequestParam(required = false) Exhibition exhibition,
+        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Set<Exhibition> exhibitions = user.getExhibitions();
-
+        /*Set<Exhibition> exhibitions = user.getExhibitions();*/
+        /*model.addAttribute("exhibitions", exhibitions);*/
         model.addAttribute("exhibition", exhibition);
-        model.addAttribute("exhibitions", exhibitions);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
         model.addAttribute("userChannel", user);
         model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
         model.addAttribute("subscribersCount", user.getSubscribers().size());
         model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
+        
+        model.addAttribute("url", "/user-exhibitions/" + user.getId());
+        model.addAttribute("page", exhibitionService.findByAuthor(user, pageable));
 
         return "userExhibitions";
     }

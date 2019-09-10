@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ua.yakovenko.domain.Exhibition;
+import ua.yakovenko.domain.User;
 import ua.yakovenko.repository.ExhibitionRepository;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public class ExhibitionService {
 
     public Page<Exhibition> findByShowroom(String showroom, Pageable pageable) {
         return exhibitionRepository.findByShowroom(showroom, pageable);
+    }
+
+    public Page<Exhibition> findByAuthor(User user, Pageable pageable) {
+        return exhibitionRepository.findByAuthor(user, pageable);
     }
 }

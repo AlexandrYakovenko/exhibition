@@ -72,7 +72,8 @@ public class MainController {
             exhibitionService.save(exhibition);
         }
 
-        model.addAttribute("exhibitions", exhibitionService.findAll(pageable));
+        model.addAttribute("url", "/main");
+        model.addAttribute("page", exhibitionService.findAll(pageable));
 
         return "mainPage";
     }
