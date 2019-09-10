@@ -36,6 +36,7 @@ public class ExhibitionEditController {
         model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
         model.addAttribute("subscribersCount", user.getSubscribers().size());
         model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
+
         return "userExhibitions";
     }
 
