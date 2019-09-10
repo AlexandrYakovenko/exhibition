@@ -1,8 +1,9 @@
 <#include "security.ftl">
+<#import "pager.ftl" as p>
 
-<#if exhibitions??>
+
         <div class="card-columns mt-3">
-            <#list exhibitions as exhibition>
+            <#list page.content as exhibition>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${exhibition.name}</h5>
@@ -21,6 +22,5 @@
                 </div>
             </#list>
         </div>
-<#else>
-           No Exhibitions
-</#if>
+
+<@p.pager url page/>

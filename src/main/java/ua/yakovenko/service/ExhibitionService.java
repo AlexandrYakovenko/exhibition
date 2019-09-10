@@ -1,6 +1,8 @@
 package ua.yakovenko.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ua.yakovenko.domain.Exhibition;
 import ua.yakovenko.repository.ExhibitionRepository;
@@ -17,11 +19,11 @@ public class ExhibitionService {
         exhibitionRepository.save(exhibition);
     }
 
-    public List<Exhibition> findAll() {
-        return exhibitionRepository.findAll();
+    public Page<Exhibition> findAll(Pageable pageable) {
+        return exhibitionRepository.findAll(pageable);
     }
 
-    public List<Exhibition> findByShowroom(String showroom) {
-        return exhibitionRepository.findByShowroom(showroom);
+    public Page<Exhibition> findByShowroom(String showroom, Pageable pageable) {
+        return exhibitionRepository.findByShowroom(showroom, pageable);
     }
 }
