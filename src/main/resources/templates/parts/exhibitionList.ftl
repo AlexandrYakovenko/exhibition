@@ -9,7 +9,7 @@
                         <h5 class="card-title">${exhibition.name}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Showroom : ${exhibition.showroom}</h6>
                         <p class="card-text">${exhibition.description}</p><br/>
-                        <a href="/sales/${user.id}" class="card-link">Buy Ticket</a>
+                        <a href="/sales/${user.id}/${exhibition.id}" class="card-link">Buy Ticket</a>
                     </div>
                     <div class="card-footer text-muted">
                         <a href="/user-exhibitions/${exhibition.author.id}">${exhibition.authorName}</a>

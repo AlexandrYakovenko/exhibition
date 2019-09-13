@@ -8,21 +8,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.yakovenko.domain.Exhibition;
 import ua.yakovenko.domain.User;
 import ua.yakovenko.service.SalesService;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 public class SalesController {
     @Autowired
     private SalesService salesService;
+    private Long exhibitionId;
 
-    @GetMapping("/sales/{user}")
+    @GetMapping("/sales/{user}/{id}")
     public String buyTicket(
             @PathVariable User user,
+            @PathVariable Long id,
             Model model
     ) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("money", user.getAccountMoney());
+        exhibitionId =  id;
+        model.addAttribute("exhibition", salesService.findById(id).get());
 
         return "sales";
     }
@@ -51,6 +61,6 @@ public class SalesController {
 
         salesService.addMoney(user, accountMoney);
 
-        return"redirect:/sales/" + user.getId();
+        return"redirect:/sales/" + user.getId() + "/" + exhibitionId;
     }
 }

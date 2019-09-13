@@ -12,7 +12,7 @@
         <div class="row">
             <a class="btn btn-primary" href="/sales/addMoney/${user.id}">Add Money</a>
         </div>
-        <#--<div class="row">
+        <div class="row">
             <div class="column">
                 <div class="card-columns mt-3">
                     <div class="card">
@@ -28,6 +28,6 @@
                    </div>
                 </div>
             </div>
-        </div>-->
+        </div>
     </div>
 </@p.page>
