@@ -64,5 +64,15 @@ public class SalesController {
         return"redirect:/sales/" + user.getId() + "/" + exhibitionId;
     }
 
+    @PostMapping("salesUser/{user}")
+    public String salesUser(
+            @PathVariable User user,
+            Model model
+    ) {
+        model.addAttribute("user", user);
+
+        return "salesUser";
+    }
+
 
 }

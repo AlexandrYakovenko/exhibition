@@ -30,9 +30,9 @@
             </div>
         </div>
         <div class="row">
-            <form action="/sales" method="post">
-                <input type="text" name="count" class="form-control"
-                       placeholder="0" />
+            <form action="/salesUser/${user.id}" method="post">
+               <#-- <input type="text" name="count" class="form-control"
+                       placeholder="0" />-->
 
                 <input type="hidden" name="exhibition" value="${exhibition.id}" />
 
