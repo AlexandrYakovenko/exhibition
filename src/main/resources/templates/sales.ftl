@@ -29,5 +29,20 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <form action="/sales" method="post">
+                <input type="text" name="count" class="form-control"
+                       placeholder="0" />
+
+                <input type="hidden" name="exhibition" value="${exhibition.id}" />
+
+                <!-- security_token only to post-methods -->
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+
+                <button class="btn btn-success mt-2" type="submit">
+                    Buy
+                </button>
+            </form>
+        </div>
     </div>
 </@p.page>

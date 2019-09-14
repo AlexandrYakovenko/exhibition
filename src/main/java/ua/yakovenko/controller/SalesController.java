@@ -63,4 +63,6 @@ public class SalesController {
 
         return"redirect:/sales/" + user.getId() + "/" + exhibitionId;
     }
+
+
 }
