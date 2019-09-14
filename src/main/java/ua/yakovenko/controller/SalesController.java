@@ -1,6 +1,8 @@
 package ua.yakovenko.controller;
 
+import org.hibernate.boot.jaxb.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import ua.yakovenko.domain.User;
 import ua.yakovenko.service.SalesService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -67,12 +71,22 @@ public class SalesController {
     @PostMapping("salesUser/{user}")
     public String salesUser(
             @PathVariable User user,
+            @RequestParam Long salesId,
             Model model
     ) {
         model.addAttribute("user", user);
 
+        try {
+            salesService.addTicket(user, salesId);
+        } catch (Exception e) {
+            model.addAttribute("buyError", "You have bought this ticket");
+            return "redirect:/sales/" + user.getId() + "/" + exhibitionId;
+        }
+
+        List<Exhibition> tickets = salesService.findUserTickets(user);
+
+        model.addAttribute("tickets", tickets);
+
         return "salesUser";
     }
-
-
 }

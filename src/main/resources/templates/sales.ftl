@@ -9,6 +9,11 @@
                 <h5>Balance : ${money}</h5>
             </div>
         </div>
+        <#if buyError??>
+            <div class="alert alert-danger" role="alert">
+               ${buyError}
+            </div>
+        </#if>
         <div class="row">
             <a class="btn btn-primary" href="/sales/addMoney/${user.id}">Add Money</a>
         </div>
@@ -20,7 +25,7 @@
                             <h5 class="card-title">${exhibition.name}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Showroom : ${exhibition.showroom}</h6>
                              <p class="card-text">${exhibition.description}</p><br/>
-                             <a href="/sales/${exhibition.id}" class="card-link">Buy Ticket</a>
+                             <#--<a href="/sales/${exhibition.id}" class="card-link">Buy Ticket</a>-->
                         </div>
                         <div class="card-footer text-muted">
                              <a href="/user-exhibitions/${exhibition.author.id}">${exhibition.authorName}</a>
@@ -34,7 +39,7 @@
                <#-- <input type="text" name="count" class="form-control"
                        placeholder="0" />-->
 
-                <input type="hidden" name="exhibition" value="${exhibition.id}" />
+                <input type="hidden" name="salesId" value="${exhibition.id}" />
 
                 <!-- security_token only to post-methods -->
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />

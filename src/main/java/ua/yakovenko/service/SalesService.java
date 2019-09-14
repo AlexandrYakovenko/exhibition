@@ -6,7 +6,9 @@ import ua.yakovenko.domain.User;
 import ua.yakovenko.repository.ExhibitionRepository;
 import ua.yakovenko.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SalesService {
@@ -26,5 +28,21 @@ public class SalesService {
 
     public Optional<Exhibition> findById(Long id) {
        return exhibitionRepository.findById(id);
+    }
+
+    public void addTicket(User user, Long salesId) throws Exception {
+        List<Exhibition> listUserTickets = user.getBoughtTickets();
+
+        Exhibition currentTicket = exhibitionRepository.findById(salesId).get();
+
+        if (!listUserTickets.contains(currentTicket)) {
+            listUserTickets.add(currentTicket);
+        } else {
+            throw new Exception();
+        }
+    }
+
+    public List<Exhibition> findUserTickets(User user) {
+        return user.getBoughtTickets();
     }
 }

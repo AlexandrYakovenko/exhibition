@@ -14,6 +14,6 @@
     <#include "parts/exhibitionEdit.ftl"/>
 </#if>
 
-<#include "parts/exhibitionList.ftl"/>
+    <#include "parts/exhibitionList.ftl"/>
 
 </@p.page>

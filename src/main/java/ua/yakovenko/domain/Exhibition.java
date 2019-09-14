@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 @Entity
 public class Exhibition {
     @Id
