@@ -68,6 +68,18 @@ public class SalesController {
         return"redirect:/sales/" + user.getId() + "/" + exhibitionId;
     }
 
+    @GetMapping("salesUser/{user}")
+    public String salesUser(
+            @PathVariable User user,
+            Model model
+    ){
+        List<Exhibition> tickets = salesService.findUserTickets(user);
+        model.addAttribute("tickets", tickets);
+
+        return "salesUser";
+    }
+
+
     @PostMapping("salesUser/{user}")
     public String salesUser(
             @PathVariable User user,

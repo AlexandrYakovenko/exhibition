@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
@@ -35,6 +37,12 @@ public class Exhibition {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
+
+    @NonNull
+    private Long price;
+
+    @NonNull
+    private Date date;
 
     public String getAuthorName() {
         return author != null ? author.getUsername() : "admin";

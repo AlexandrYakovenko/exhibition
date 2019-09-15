@@ -43,6 +43,28 @@
                         </#if>
                     </div>
 
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" name="price" class="form-control ${(priceError??)?string('is-invalid', '')}"
+                               id="price" value="<#if exhibition??>${exhibition.price}</#if>" placeholder="0"/>
+                        <#if priceError??>
+                                    <div class="invalid-feedback">
+                                        ${priceError}
+                                    </div>
+                        </#if>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" class="form-control ${(dateError??)?string('is-invalid', '')}"
+                               id="date" value="<#if exhibition??>${exhibition.date}</#if>" placeholder="Date of event"/>
+                        <#if dateError??>
+                                    <div class="invalid-feedback">
+                                        ${dateError}
+                                    </div>
+                        </#if>
+                    </div>
+
                     <!-- security_token only to post-methods -->
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
                     <input type="hidden" name="id" value="<#if exhibition??>${exhibition.id}</#if>" />

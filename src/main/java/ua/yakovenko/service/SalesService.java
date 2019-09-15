@@ -31,12 +31,13 @@ public class SalesService {
     }
 
     public void addTicket(User user, Long salesId) throws Exception {
-        List<Exhibition> listUserTickets = user.getBoughtTickets();
+//        List<Exhibition> listUserTickets = user.getBoughtTickets();
 
         Exhibition currentTicket = exhibitionRepository.findById(salesId).get();
 
-        if (!listUserTickets.contains(currentTicket)) {
-            listUserTickets.add(currentTicket);
+        if (!user.getBoughtTickets().contains(currentTicket) && user.getAccountMoney() >= currentTicket.getPrice()) {
+            user.getBoughtTickets().add(currentTicket);
+            user.setAccountMoney(user.getAccountMoney() - currentTicket.getPrice());
         } else {
             throw new Exception();
         }
