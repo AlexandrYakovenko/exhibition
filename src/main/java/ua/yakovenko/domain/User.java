@@ -35,8 +35,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Exhibition> exhibitions;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    /*@JoinColumn(name = "user_sales_id")*/
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Exhibition> boughtTickets;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

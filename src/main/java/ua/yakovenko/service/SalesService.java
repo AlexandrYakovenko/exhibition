@@ -30,14 +30,16 @@ public class SalesService {
        return exhibitionRepository.findById(id);
     }
 
+    //TODO сделат красиво
     public void addTicket(User user, Long salesId) throws Exception {
-//        List<Exhibition> listUserTickets = user.getBoughtTickets();
-
         Exhibition currentTicket = exhibitionRepository.findById(salesId).get();
 
-        if (!user.getBoughtTickets().contains(currentTicket) && user.getAccountMoney() >= currentTicket.getPrice()) {
+        if (!user.getBoughtTickets().contains(currentTicket)
+                && user.getAccountMoney() >= currentTicket.getPrice()) {
             user.getBoughtTickets().add(currentTicket);
-            user.setAccountMoney(user.getAccountMoney() - currentTicket.getPrice());
+
+            user.setAccountMoney(
+                    user.getAccountMoney() - currentTicket.getPrice());
         } else {
             throw new Exception();
         }

@@ -37,6 +37,7 @@ public class RegistrationController {
         return "registration";
     }
 
+    //TODO убрать много if
     @PostMapping("registration")
     public String addUser(
             @RequestParam String passwordConfirm,

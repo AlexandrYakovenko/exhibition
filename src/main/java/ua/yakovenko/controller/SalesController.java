@@ -1,9 +1,6 @@
 package ua.yakovenko.controller;
 
-import org.hibernate.boot.jaxb.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,16 +12,13 @@ import ua.yakovenko.domain.User;
 import ua.yakovenko.service.SalesService;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 public class SalesController {
     @Autowired
     private SalesService salesService;
+
+    //TODO переделать без єтой переменной
     private Long exhibitionId;
 
     @GetMapping("/sales/{user}/{id}")
@@ -91,6 +85,7 @@ public class SalesController {
         try {
             salesService.addTicket(user, salesId);
         } catch (Exception e) {
+            //TODO
             model.addAttribute("buyError", "You have bought this ticket");
             return "redirect:/sales/" + user.getId() + "/" + exhibitionId;
         }
