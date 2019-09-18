@@ -12,7 +12,7 @@
                 <label for="exhibition">Put money on balance</label>
                 <input type="text" name="accountMoney" class="form-control ${(moneyError??)?string('is-invalid', '')}"
                <#-- pattern="[1-9]{1}|^[1-9]{1}[0-9]{1}|^[1-9]{1}[0-9]{1}[0-9]{1}|^1000"-->
-                       id="exhibition"  placeholder="from 1 to 1000$"/>
+                       id="exhibition"  placeholder="0"/>
                         <#if moneyError??>
                             <div class="invalid-feedback">
                                 ${moneyError}

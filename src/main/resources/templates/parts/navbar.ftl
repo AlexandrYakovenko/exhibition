@@ -36,6 +36,6 @@
         <div class="navbar-text mr-3"><#if user??>${name}<#else>Please, login</#if></div>
         <a class="btn btn-info mr-1" href="/?lang=ua">UK</a>
         <a class="btn btn-info mr-3" href="/?lang=en">EN</a>
-        <@logout.logut/>
+        <#include "logut.ftl"/>
     </div>
 </nav>

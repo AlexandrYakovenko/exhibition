@@ -13,13 +13,16 @@
                         <h6 class="card-subtitle mb-2 ">Date : ${exhibition.date}</h6>
                         <a href="/sales/${user.id}/${exhibition.id}" class="card-link">Buy Ticket</a>
                     </div>
-                    <div class="card-footer text-muted">
-                        <a href="/user-exhibitions/${exhibition.author.id}">${exhibition.authorName}</a>
-                        <#if exhibition.author.id == currentUserId>
-                            <a class="btn btn-secondary" href="/user-exhibitions/${exhibition.author.id}?exhibition=${exhibition.id}">
-                                Edit
-                            </a>
-                        </#if>
+                    <div class="card-footer text-muted container">
+                        <div class="row">
+                            <a class="col align-self-center" href="/user-exhibitions/${exhibition.author.id}">${exhibition.authorName}</a>
+                            <p class="col align-self-center"></p>
+                            <#if exhibition.author.id == currentUserId>
+                                <a class="col align-self-center btn btn-secondary" href="/user-exhibitions/${exhibition.author.id}?exhibition=${exhibition.id}">
+                                    Edit
+                                </a>
+                            </#if>
+                        </div>
                     </div>
                 </div>
             </#list>
