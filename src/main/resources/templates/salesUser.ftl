@@ -21,7 +21,6 @@
                      <td>${ticket.id}</td>
                      <td>${ticket.showroom}</td>
                      <td style="max-width: 200px">${ticket.description}</td>
-                     <td></td>
                      <td>${ticket.price}</td>
                      <td>${ticket.date}</td>
                  </tr>
