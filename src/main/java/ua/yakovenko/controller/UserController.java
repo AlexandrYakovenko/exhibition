@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import ua.yakovenko.domain.Role;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.service.UserService;
+import ua.yakovenko.model.domain.Role;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.service.UserService;
 
 import java.util.Map;
 

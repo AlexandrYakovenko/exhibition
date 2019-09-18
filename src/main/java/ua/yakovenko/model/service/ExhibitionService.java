@@ -1,15 +1,12 @@
-package ua.yakovenko.service;
+package ua.yakovenko.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ua.yakovenko.domain.Exhibition;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.repository.ExhibitionRepository;
-
-import java.util.List;
-import java.util.Optional;
+import ua.yakovenko.model.domain.Exhibition;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.repository.ExhibitionRepository;
 
 @Service
 public class ExhibitionService {

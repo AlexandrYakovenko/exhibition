@@ -1,10 +1,10 @@
-package ua.yakovenko.service;
+package ua.yakovenko.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.repository.UserRepository;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.repository.UserRepository;
 
 @Service
 public class ProfileService {

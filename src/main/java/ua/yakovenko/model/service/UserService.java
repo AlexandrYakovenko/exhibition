@@ -1,14 +1,13 @@
-package ua.yakovenko.service;
+package ua.yakovenko.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.yakovenko.domain.Role;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.repository.UserRepository;
+import ua.yakovenko.model.domain.Role;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.List;

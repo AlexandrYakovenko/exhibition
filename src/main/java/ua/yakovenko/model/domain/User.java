@@ -1,4 +1,4 @@
-package ua.yakovenko.domain;
+package ua.yakovenko.model.domain;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Data
 @EqualsAndHashCode(of = {"id"})

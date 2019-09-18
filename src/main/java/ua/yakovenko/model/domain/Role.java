@@ -1,4 +1,4 @@
-package ua.yakovenko.domain;
+package ua.yakovenko.model.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 

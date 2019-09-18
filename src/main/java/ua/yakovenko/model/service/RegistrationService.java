@@ -1,14 +1,14 @@
-package ua.yakovenko.service;
+package ua.yakovenko.model.service;
 
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.repository.UserRepository;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.repository.UserRepository;
 
 import java.util.Collections;
 
-import static ua.yakovenko.domain.Role.*;
+import static ua.yakovenko.model.domain.Role.*;
 
 @Service
 public class RegistrationService {

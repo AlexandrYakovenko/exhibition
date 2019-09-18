@@ -1,14 +1,14 @@
-package ua.yakovenko.service;
+package ua.yakovenko.model.service;
 
 import org.springframework.stereotype.Service;
-import ua.yakovenko.domain.Exhibition;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.repository.ExhibitionRepository;
-import ua.yakovenko.repository.UserRepository;
+import ua.yakovenko.model.domain.Exhibition;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.exception.BuyException;
+import ua.yakovenko.model.repository.ExhibitionRepository;
+import ua.yakovenko.model.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class SalesService {
@@ -31,7 +31,7 @@ public class SalesService {
     }
 
     //TODO сделат красиво
-    public void addTicket(User user, Long salesId) throws Exception {
+    public void addTicket(User user, Long salesId) throws BuyException {
         Exhibition currentTicket = exhibitionRepository.findById(salesId).get();
 
         if (!user.getBoughtTickets().contains(currentTicket)
@@ -41,7 +41,7 @@ public class SalesService {
             user.setAccountMoney(
                     user.getAccountMoney() - currentTicket.getPrice());
         } else {
-            throw new Exception();
+            throw new BuyException();
         }
     }
 

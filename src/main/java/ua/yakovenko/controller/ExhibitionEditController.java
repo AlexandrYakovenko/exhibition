@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.yakovenko.domain.Exhibition;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.service.ExhibitionService;
-
-import java.util.Set;
+import ua.yakovenko.model.domain.Exhibition;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.service.ExhibitionService;
 
 @Controller
 public class ExhibitionEditController {

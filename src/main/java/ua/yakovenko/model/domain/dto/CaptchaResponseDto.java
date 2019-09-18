@@ -1,4 +1,4 @@
-package ua.yakovenko.domain.dto;
+package ua.yakovenko.model.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

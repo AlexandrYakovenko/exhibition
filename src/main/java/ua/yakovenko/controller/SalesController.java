@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.yakovenko.domain.Exhibition;
-import ua.yakovenko.domain.User;
-import ua.yakovenko.service.SalesService;
+import ua.yakovenko.model.domain.Exhibition;
+import ua.yakovenko.model.domain.User;
+import ua.yakovenko.model.exception.BuyException;
+import ua.yakovenko.model.service.SalesService;
 
 import java.util.List;
 
@@ -32,6 +33,12 @@ public class SalesController {
         exhibitionId =  id;
         model.addAttribute("exhibition", salesService.findById(id).get());
 
+        if (user.getBoughtTickets().contains(salesService.findById(id).get())) {
+            model.addAttribute("buyError", "You have already bought this ticket");
+        } else {
+            model.addAttribute("buyError", null);
+        }
+        
         return "sales";
     }
 
@@ -84,9 +91,10 @@ public class SalesController {
 
         try {
             salesService.addTicket(user, salesId);
-        } catch (Exception e) {
+        } catch (BuyException e) {
             //TODO
-            model.addAttribute("buyError", "You have bought this ticket");
+           model.addAttribute("buyError", "You have bought this ticket");
+
             return "redirect:/sales/" + user.getId() + "/" + exhibitionId;
         }
 
