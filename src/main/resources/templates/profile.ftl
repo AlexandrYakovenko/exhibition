@@ -2,26 +2,38 @@
 
 <@p.page>
 
-<h5>${username}</h5>
+    <h5><@spring.message "label.username"/>${username}</h5>
 
     <form  method="post">
+        <!-- Username -->
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">User Name :</label>
+            <label class="col-sm-2 col-form-label">
+                <@spring.message "label.username"/>
+            </label>
             <div class="col-sm-6">
-                <input type="text" name="username" class="form-control" placeholder="User name" value="${username}"/>
+                <input type="text" name="username" class="form-control"  value="${username}"
+                       placeholder="<@spring.message "placeholder.username"/>"/>
             </div>
         </div>
+
+        <!-- Password -->
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Password :</label>
+            <label class="col-sm-2 col-form-label">
+                <@spring.message "label.password"/>
+            </label>
             <div class="col-sm-6">
-                <input type="password" name="password" class="form-control" placeholder="Password" />
+                <input type="password" name="password" class="form-control"
+                       placeholder="<@spring.message "placeholder.password"/>" />
             </div>
         </div>
+
         <!-- security_token only to post-methods -->
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
 
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">
+            <@spring.message "button.save"/>
+        </button>
     </form>
 
 </@p.page>

@@ -3,10 +3,12 @@
 <form action="${path}" method="post">
     <!-- Username -->
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Username :</label>
+        <label class="col-sm-2 col-form-label">
+            <@spring.message "label.username"/>
+        </label>
         <div class="col-sm-6">
             <input type="text" name="username" class="form-control ${(usernameError??)?string('is-invalid', '')}"
-                   value="<#if user??>${user.username}</#if>" placeholder="Username" />
+                   value="<#if user??>${user.username}</#if>" placeholder="<@spring.message "placeholder.username"/>" />
             <#if usernameError??>
                 <div class="invalid-feedback">
                     ${usernameError}
@@ -17,10 +19,12 @@
 
     <!-- Password -->
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password :</label>
+        <label class="col-sm-2 col-form-label">
+            <@spring.message "label.password"/>
+        </label>
         <div class="col-sm-6">
             <input type="password" name="password" class="form-control ${(passwordError??)?string('is-invalid', '')}"
-                   placeholder="Password" />
+                   placeholder="<@spring.message "placeholder.password"/>" />
              <#if passwordError??>
                 <div class="invalid-feedback">
                     ${passwordError}
@@ -32,10 +36,12 @@
     <#if isRegisterForm>
     <!-- Password  Confirmation-->
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Confirm Password :</label>
+            <label class="col-sm-2 col-form-label">
+                <@spring.message "label.confirm_password"/>
+            </label>
             <div class="col-sm-6">
                 <input type="password" name="passwordConfirm" class="form-control ${(passwordConfirmError??)?string('is-invalid', '')}"
-                       placeholder="Confirm Password" />
+                       placeholder="<@spring.message "placeholder.password"/>" />
                  <#if passwordConfirmError??>
                     <div class="invalid-feedback">
                         ${passwordConfirmError}
@@ -60,16 +66,16 @@
 
     <button class="btn btn-primary" type="submit">
         <#if isRegisterForm>
-            Register
+             <@spring.message "label.registration"/>
         <#else>
-            Sign In
+            <@spring.message "label.login"/>
         </#if>
     </button>
 </form>
     <#if !isRegisterForm>
     <div>
         <a href="/registration" class="btn btn-link mt-3">
-            Registration
+            <@spring.message "label.registration"/>
         </a>
     </div>
     </#if>

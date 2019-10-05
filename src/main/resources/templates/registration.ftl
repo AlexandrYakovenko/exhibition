@@ -3,8 +3,10 @@
 
 <@p.page>
 
-<div class="mb-1">Add new user</div>
+    <div class="mb-1">
+        <b><@spring.message "label.registration"/>"</b>
+    </div>
 
-<@registration.inputData "/registration" true/>
+    <@registration.inputData "/registration" true/>
 
 </@p.page>
