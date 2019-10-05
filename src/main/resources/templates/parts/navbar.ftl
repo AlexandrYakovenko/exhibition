@@ -12,9 +12,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/main">Exhibitions</a>
             </li>
-            <#--<li class="nav-item">
-                <a class="nav-link" href="/salesUser/${user.id}">Sales</a>
-            </li>-->
             <#if isAdmin>
                 <li class="nav-item">
                     <a class="nav-link" href="/user-exhibitions/${currentUserId}">My Exhibitions</a>
@@ -23,6 +20,9 @@
             <#if user??>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/salesUser/${currentUserId}">Tickets</a>
                 </li>
             </#if>
             <#if isSuperAdmin>

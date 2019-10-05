@@ -9,7 +9,7 @@
         <form action="/sales/addMoney/${user.id}" method="post">
             <!-- Add money -->
             <div class="form-group">
-                <label for="exhibition">Put money on balance</label>
+                <label for="exhibition">Replenish balance</label>
                 <input type="text" name="accountMoney" class="form-control ${(moneyError??)?string('is-invalid', '')}"
                <#-- pattern="[1-9]{1}|^[1-9]{1}[0-9]{1}|^[1-9]{1}[0-9]{1}[0-9]{1}|^1000"-->
                        id="exhibition"  placeholder="0"/>

@@ -3,7 +3,7 @@
 <form action="${path}" method="post">
     <!-- Username -->
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">User Name :</label>
+        <label class="col-sm-2 col-form-label">Username :</label>
         <div class="col-sm-6">
             <input type="text" name="username" class="form-control ${(usernameError??)?string('is-invalid', '')}"
                    value="<#if user??>${user.username}</#if>" placeholder="Username" />
@@ -32,10 +32,10 @@
     <#if isRegisterForm>
     <!-- Password  Confirmation-->
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Password :</label>
+            <label class="col-sm-2 col-form-label">Confirm Password :</label>
             <div class="col-sm-6">
                 <input type="password" name="passwordConfirm" class="form-control ${(passwordConfirmError??)?string('is-invalid', '')}"
-                       placeholder="Retype Password" />
+                       placeholder="Confirm Password" />
                  <#if passwordConfirmError??>
                     <div class="invalid-feedback">
                         ${passwordConfirmError}
@@ -58,9 +58,19 @@
     <!-- security_token only to post-methods -->
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
-    <#if !isRegisterForm><a href="/registration">Registration</a></#if>
-
-    <button class="btn btn-primary" type="submit"><#if isRegisterForm>Create<#else>Sign In</#if></button>
+    <button class="btn btn-primary" type="submit">
+        <#if isRegisterForm>
+            Register
+        <#else>
+            Sign In
+        </#if>
+    </button>
 </form>
-
+    <#if !isRegisterForm>
+    <div>
+        <a href="/registration" class="btn btn-link mt-3">
+            Registration
+        </a>
+    </div>
+    </#if>
 </#macro>
