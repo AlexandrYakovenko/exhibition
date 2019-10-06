@@ -21,9 +21,12 @@
                         <h6 class="card-subtitle mb-2 ">
                             <@spring.message "label.date"/>${exhibition.date}
                         </h6>
-                        <a href="/sales/${user.id}/${exhibition.id}" class="card-link">
-                            <@spring.message "button.buy_ticket"/>
-                        </a>
+                        <form action="/sales/${user.id}" method="get">
+                            <input type="hidden" value="${exhibition.id}" name="ex">
+                            <button type="submit" class="btn btn-link">
+                                <@spring.message "button.buy_ticket"/>
+                            </button>
+                        </form>
                     </div>
                     <div class="card-footer text-muted container">
                         <div class="row">
@@ -34,11 +37,8 @@
                             <#if exhibition.author.id == currentUserId>
                                 <#if deleteFactor??>
                                 <form class="col align-self-center" action="/user-exhibitions/delete" method="post">
-
                                     <input type="hidden" value="${exhibition.id}" name="exhibitionId">
-
                                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
-
                                     <button type="submit" class="btn btn-secondary">
                                         <@spring.message "button.delete"/>
                                     </button>

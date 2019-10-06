@@ -34,7 +34,7 @@ public class Exhibition {
 
     @NonNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "author")
     private User author;
 
     @NonNull

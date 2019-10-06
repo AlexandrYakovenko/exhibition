@@ -32,4 +32,8 @@ public class ExhibitionService {
     public void deleteById(Long id) {
         exhibitionRepository.deleteById(id);
     }
+
+    public Exhibition findById(Long id) {
+        return exhibitionRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }

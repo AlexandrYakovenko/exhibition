@@ -1,15 +1,14 @@
 package ua.yakovenko.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ua.yakovenko.domain.entity.Exhibition;
 import ua.yakovenko.domain.entity.User;
 import ua.yakovenko.exception.BuyException;
+import ua.yakovenko.service.ExhibitionService;
 import ua.yakovenko.service.SalesService;
 
 import java.util.List;
@@ -20,24 +19,26 @@ public class SalesController {
     @Autowired
     private SalesService salesService;
 
+    @Autowired
+    private ExhibitionService exhibitionService;
+
     //TODO переделать без єтой переменной
     private Long exhibitionId;
 
-    @GetMapping("/sales/{user}/{id}")
+    @GetMapping("/sales/{user}")
     public String buyTicket(
             @PathVariable User user,
-            @PathVariable Long id,
+            @RequestParam(value = "ex",required = false) Long id,
             Model model
     ) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("money", user.getAccountMoney());
-        exhibitionId =  id;
-        model.addAttribute("exhibition", salesService.findById(id).get());
 
-        if (user.getBoughtTickets().contains(salesService.findById(id).get())) {
+        Exhibition exhibition = exhibitionService.findById(id);
+        model.addAttribute("exhibition", exhibition);
+
+        if (user.getBoughtTickets().contains(exhibition)) {
             model.addAttribute("buyError", "You have already bought this ticket");
-        } else {
-            model.addAttribute("buyError", null);
         }
         
         return "sales";
