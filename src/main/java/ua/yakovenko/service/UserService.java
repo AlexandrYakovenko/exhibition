@@ -21,10 +21,24 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Method save user in DB.
+     *
+     * @param user
+     */
     public void save(User user) {
         userRepository.save(user);
     }
 
+    /**
+     *
+     * Method only for SUPER_ADMIN!
+     * Method for changing username and roles.
+     *
+     * @param username
+     * @param form
+     * @param user
+     */
     public void saveUser(String username, Map<String, String> form, User user) {
         user.setUsername(username);
 
@@ -43,10 +57,18 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    /**
+     * @return List of all users.
+     */
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    /**
+     * @param username
+     * @return User by username
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -58,6 +80,13 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     *
+     * Method update user's balance.
+     *
+     * @param user
+     * @param money
+     */
     public void updateUserBalance(User user, Long money) {
         Long userBalance = user.getAccountMoney();
 

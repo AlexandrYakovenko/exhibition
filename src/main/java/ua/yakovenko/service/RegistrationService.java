@@ -1,6 +1,5 @@
 package ua.yakovenko.service;
 
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.yakovenko.domain.entity.User;
@@ -12,7 +11,9 @@ import static ua.yakovenko.domain.entity.Role.*;
 
 @Service
 public class RegistrationService {
+
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     public RegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -20,6 +21,13 @@ public class RegistrationService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     *
+     * Add user in DB, if user with doesn't exist with this username.
+     *
+     * @param user
+     * @return
+     */
     public boolean addUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
 

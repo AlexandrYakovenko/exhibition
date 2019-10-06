@@ -15,7 +15,7 @@ public class ExhibitionService {
     private ExhibitionRepository exhibitionRepository;
 
     /**
-     * Save entity exhibition un repository
+     * Save entity exhibition un repository.
      *
      * @param exhibition
      */
@@ -24,8 +24,8 @@ public class ExhibitionService {
     }
 
     /**
-     * @param pageable
-     * @return page of exhibitions, default param 10
+     * @param pageable, default 10
+     * @return page of exhibitions
      */
     public Page<Exhibition> findAll(Pageable pageable) {
         return exhibitionRepository.findAll(pageable);
@@ -34,7 +34,7 @@ public class ExhibitionService {
     /**
      * @param showroom
      * @param pageable
-     * @return
+     * @return page of exhibitions, sorting by showroom
      */
     public Page<Exhibition> findByShowroom(String showroom, Pageable pageable) {
         return exhibitionRepository.findByShowroom(showroom, pageable);
@@ -43,13 +43,15 @@ public class ExhibitionService {
     /**
      * @param user
      * @param pageable
-     * @return
+     * @return page of exhibitions, sorting by author
      */
     public Page<Exhibition> findByAuthor(User user, Pageable pageable) {
         return exhibitionRepository.findByAuthor(user, pageable);
     }
 
     /**
+     * Delete exhibition by id param.
+     *
      * @param id
      */
     public void deleteById(Long id) {
@@ -58,7 +60,7 @@ public class ExhibitionService {
 
     /**
      * @param id
-     * @return
+     * @return entity of exhibition
      */
     public Exhibition findById(Long id) {
         return exhibitionRepository.findById(id).orElseThrow(RuntimeException::new);

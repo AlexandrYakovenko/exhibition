@@ -8,10 +8,18 @@ import ua.yakovenko.repository.UserRepository;
 
 @Service
 public class ProfileService {
+
     @Autowired
     private UserRepository userRepository;
 
-    //TODO сделать так чтоб нельзя было менять Ник не подтвердив пароль
+    /**
+     * Method change username if it differ from old username.
+     * And change password if it isn't null.
+     *
+     * @param user
+     * @param username
+     * @param password
+     */
     public void updateProfile(User user, String username, String password) {
         String oldUsername = user.getUsername();
 

@@ -22,11 +22,21 @@ public class SalesService {
         this.exhibitionRepository = exhibitionRepository;
     }
 
+    /**
+     * Add ticket to user's field boughtTickets,
+     * if he has enough money,
+     * and he hasn't this ticket.
+     *
+     * @param user
+     * @param ticketId
+     * @throws BuyException
+     */
     public void addTicket(User user, Long ticketId) throws BuyException {
         Exhibition currentTicket = exhibitionRepository.findById(ticketId).get();
 
         if (!user.getBoughtTickets().contains(currentTicket)
                 && user.getAccountMoney() >= currentTicket.getPrice()) {
+
             user.getBoughtTickets().add(currentTicket);
 
             user.setAccountMoney(user.getAccountMoney() - currentTicket.getPrice());
@@ -37,6 +47,11 @@ public class SalesService {
         }
     }
 
+    /**
+     *
+     * @param user
+     * @return List of user's tickets
+     */
     public List<Exhibition> findUserTickets(User user) {
         return user.getBoughtTickets();
     }
