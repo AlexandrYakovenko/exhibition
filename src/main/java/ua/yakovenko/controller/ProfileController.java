@@ -1,5 +1,7 @@
 package ua.yakovenko.controller;
 
+import static ua.yakovenko.controller.Constants.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,9 +25,9 @@ public class ProfileController {
             @AuthenticationPrincipal User user,
             Model model
     ) {
-        model.addAttribute("username", user.getUsername());
+        model.addAttribute(USERNAME, user.getUsername());
 
-        return "profile";
+        return PAGE_PROFILE;
     }
 
     @PostMapping("/profile")
@@ -36,6 +38,6 @@ public class ProfileController {
     ) {
         profileService.updateProfile(user, username, password);
 
-        return "redirect:/user/profile";
+        return REDIRECT + URL_USER_PROFILE;
     }
 }

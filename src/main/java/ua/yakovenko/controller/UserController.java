@@ -1,5 +1,7 @@
 package ua.yakovenko.controller;
 
+import static ua.yakovenko.controller.Constants.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -24,9 +26,9 @@ public class UserController {
     public String userList(
             Model model
     ) {
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute(USERS, userService.findAll());
 
-        return "userList";
+        return PAGE_USER_LIST;
     }
 
     @GetMapping("{user}")
@@ -34,21 +36,21 @@ public class UserController {
             @PathVariable User user,
             Model model
     ) {
-        model.addAttribute("user", user);
-        model.addAttribute("roles", Role.values());
+        model.addAttribute(USER, user);
+        model.addAttribute(ROLES, Role.values());
 
-        return "userEdit";
+        return PAGE_USER_EDIT;
     }
 
     @PostMapping
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user
+            @RequestParam(PARAM_USER_ID) User user
     ) {
         userService.saveUser(username, form, user);
 
-        return "redirect:/user";
+        return REDIRECT + URL_USER;
     }
 
 }

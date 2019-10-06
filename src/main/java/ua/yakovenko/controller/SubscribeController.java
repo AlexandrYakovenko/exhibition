@@ -1,5 +1,7 @@
 package ua.yakovenko.controller;
 
+import static ua.yakovenko.controller.Constants.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ public class SubscribeController {
     ) {
         subscribeService.subscribe(currentUser, user);
 
-        return "redirect:/user-exhibitions/" + user.getId();
+        return REDIRECT + URL_USER_EXHIBITIONS + user.getId();
     }
 
     @GetMapping("unsubscribe/{user}")
@@ -34,7 +36,7 @@ public class SubscribeController {
     ) {
         subscribeService.unsubscribe(currentUser, user);
 
-        return "redirect:/user-exhibitions/" + user.getId();
+        return REDIRECT + URL_USER_EXHIBITIONS + user.getId();
     }
 
     @GetMapping("{type}/{user}/list")
@@ -43,16 +45,15 @@ public class SubscribeController {
             @PathVariable User user,
             @PathVariable String type
     ) {
-        model.addAttribute("userChannel", user);
-        model.addAttribute("type", type);
+        model.addAttribute(USER_CHANNEL, user);
+        model.addAttribute(TYPE, type);
 
-        String subscriptions = "subscriptions";
-        if (subscriptions.equals(type)) {
-            model.addAttribute("users", user.getSubscriptions());
+        if (SUBSCRIPTIONS.equals(type)) {
+            model.addAttribute(USERS, user.getSubscriptions());
         } else {
-            model.addAttribute("users", user.getSubscribers());
+            model.addAttribute(USERS, user.getSubscribers());
         }
 
-        return "subscriptions";
+        return PAGE_SUBSCRIPTIONS;
     }
 }

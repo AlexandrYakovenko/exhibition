@@ -22,7 +22,7 @@
                             <@spring.message "label.date"/>${exhibition.date}
                         </h6>
                         <form action="/sales/${user.id}" method="get">
-                            <input type="hidden" value="${exhibition.id}" name="ex">
+                            <input type="hidden" value="${exhibition.id}" name="exhibitionId">
                             <#--<input type="hidden" name="_csrf" value="${_csrf.token}" />-->
                             <button type="submit" class="btn btn-link">
                                 <@spring.message "button.buy_ticket"/>

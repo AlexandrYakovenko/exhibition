@@ -1,5 +1,7 @@
 package ua.yakovenko.controller;
 
+import static ua.yakovenko.controller.Constants.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,14 +29,14 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage() {
-        return "home";
+        return PAGE_HOME;
     }
 
     @GetMapping("/main")
     public String mainForm(
             @RequestParam(required = false, defaultValue = "") String showroom,
             Model model,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(sort = {PARAM_ID}, direction = Sort.Direction.DESC) Pageable pageable
     ){
         Page<Exhibition> page;
 
@@ -44,11 +46,11 @@ public class MainController {
             page = exhibitionService.findAll(pageable);
         }
 
-        model.addAttribute("page", page);
-        model.addAttribute("url", "/main");
-        model.addAttribute("showroom", showroom);
+        model.addAttribute(PAGE, page);
+        model.addAttribute(URL, URL_MAIN);
+        model.addAttribute(SHOWROOM, showroom);
 
-        return "mainPage";
+        return PAGE_MAIN_PAGE;
     }
 
     @PostMapping("/main")
@@ -57,7 +59,7 @@ public class MainController {
             @Valid Exhibition exhibition,
             BindingResult bindingResult,
             Model model,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(sort = {PARAM_ID}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
         exhibition.setAuthor(user);
 
@@ -65,15 +67,15 @@ public class MainController {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
             model.mergeAttributes(errorsMap);
-            model.addAttribute("exhibition", exhibition);
+            model.addAttribute(EXHIBITION, exhibition);
         } else {
-            model.addAttribute("exhibition", null);
+            model.addAttribute(EXHIBITION, null);
             exhibitionService.save(exhibition);
         }
 
-        model.addAttribute("url", "/main");
-        model.addAttribute("page", exhibitionService.findAll(pageable));
+        model.addAttribute(URL, URL_MAIN);
+        model.addAttribute(PAGE, exhibitionService.findAll(pageable));
 
-        return "mainPage";
+        return PAGE_MAIN_PAGE;
     }
 }

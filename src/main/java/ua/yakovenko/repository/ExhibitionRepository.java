@@ -7,6 +7,7 @@ import ua.yakovenko.domain.entity.Exhibition;
 import ua.yakovenko.domain.entity.User;
 
 public interface ExhibitionRepository extends JpaRepository<Exhibition, Long> {
+
     Page<Exhibition> findAll(Pageable pageable);
 
     Page<Exhibition> findByShowroom(String showroom, Pageable pageable);

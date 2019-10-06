@@ -22,7 +22,7 @@
                                 <!-- security_token only to post-methods -->
                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
-                                <input type="hidden" name="ex" value="${exhibition.id}" />
+                                <input type="hidden" name="exhibitionId" value="${exhibition.id}" />
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary mt-2">

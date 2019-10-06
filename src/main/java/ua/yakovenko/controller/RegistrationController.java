@@ -1,5 +1,7 @@
 package ua.yakovenko.controller;
 
+import static ua.yakovenko.controller.Constants.*;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,32 +37,31 @@ public class RegistrationController {
 
     @GetMapping("registration")
     public String registration() {
-        return "registration";
+        return PAGE_REGISTRATION;
     }
 
-    //TODO убрать много if
     @PostMapping("registration")
     public String addUser(
             @RequestParam String passwordConfirm,
-            @RequestParam("g-recaptcha-response") String captchaResponse,
+            @RequestParam(G_RECAPTCHA_RESPONSE) String captchaResponse,
             @Valid User user,
             BindingResult bindingResult,
             Model model
     ) {
         boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
         if (isConfirmEmpty) {
-            model.addAttribute("passwordConfirmError", PASSWORD_CONFIRM_ERROR);
+            model.addAttribute(PASSWORD_CONFIRM_ERROR, PASSWORD_CONFIRM_ERROR_MESSAGE);
         }
 
         boolean isConfirmInvalid = user.getPassword() != null && !user.getPassword().equals(passwordConfirm);
         if (isConfirmInvalid) {
-            model.addAttribute("passwordError", PASSWORD_ERROR);
+            model.addAttribute(PASSWORD_ERROR, PASSWORD_ERROR_MESSAGE);
         }
 
         String url = String.format(CAPTCHA_URL, secret, captchaResponse);
         CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
         if (!response.isSuccess()) {
-            model.addAttribute("captchaError", CAPTCHA_ERROR);
+            model.addAttribute(CAPTCHA_ERROR, CAPTCHA_ERROR_MESSAGE);
         }
 
         if (isConfirmEmpty
@@ -72,25 +73,15 @@ public class RegistrationController {
 
             model.mergeAttributes(errors);
 
-            return "registration";
+            return PAGE_REGISTRATION;
         }
 
         if (!registrationService.addUser(user)) {
-            model.addAttribute("usernameError", USERNAME_ERROR);
+            model.addAttribute(USERNAME_ERROR, USERNAME_ERROR_MESSAGE);
 
-            return "registration";
+            return PAGE_REGISTRATION;
         }
 
-        return "redirect:/login";
+        return REDIRECT + URL_LOGIN;
     }
-
-    private final static String PASSWORD_ERROR = "Passwords are different!";
-
-    private final static String PASSWORD_CONFIRM_ERROR = "Password confirmation cannot be empty";
-
-    private final static String CAPTCHA_ERROR = "Fill captcha";
-
-    private final static String USERNAME_ERROR = "User is exists!";
-
-    private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 }
