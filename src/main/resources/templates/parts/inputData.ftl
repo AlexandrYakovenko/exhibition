@@ -65,7 +65,7 @@
     <!-- security_token only to post-methods -->
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
-    <button class="btn btn-primary" type="submit">
+    <button class="btn btn-primary mt-3" type="submit">
         <#if isRegisterForm>
              <@spring.message "label.registration"/>
         <#else>
@@ -73,6 +73,7 @@
         </#if>
     </button>
 </form>
+
     <#if !isRegisterForm>
     <div>
         <a href="/registration" class="btn btn-link mt-3">

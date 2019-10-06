@@ -7,7 +7,8 @@
     <!-- Search -->
     <div class="form-rom">
          <form action="main" method="get" class="form-inline">
-             <input type="text" name="showroom" class="form-control" value="${showroom?ifExists}" placeholder="showroom">
+             <input type="text" name="showroom" class="form-control" value="${showroom?ifExists}"
+                    placeholder="<@spring.message "placeholder.exhibition_showroom"/>">
              <button type="submit" class="btn btn-primary ml-2">
                   <@spring.message "button.search"/>
              </button>

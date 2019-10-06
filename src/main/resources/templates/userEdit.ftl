@@ -3,7 +3,7 @@
 <@p.page>
 
     <div>
-        <b><@spring.message "label.user_editior"/></b>
+        <b><@spring.message "label.user_editor"/></b>
     </div>
 
     <form action="/user" method="post">
