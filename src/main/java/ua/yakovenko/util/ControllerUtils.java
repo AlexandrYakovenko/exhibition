@@ -1,4 +1,4 @@
-package ua.yakovenko.controller;
+package ua.yakovenko.util;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

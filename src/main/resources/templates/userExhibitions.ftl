@@ -24,7 +24,9 @@
                             <@spring.message "label.subscriptions"/>
                         </div>
                         <h3 class="card-text">
-                            <a href="/user/subscriptions/${userChannel.id}/list">${subscriptionsCount}</a>
+                            <a href="/user/subscriptions/${userChannel.id}/list">
+                                ${subscriptionsCount}
+                            </a>
                         </h3>
                     </div>
                 </div>
@@ -36,7 +38,9 @@
                             <@spring.message "label.subscribers"/>
                         </div>
                         <h3 class="card-text">
-                            <a href="/user/subscribers/${userChannel.id}/list">${subscribersCount}</a>
+                            <a href="/user/subscribers/${userChannel.id}/list">
+                                ${subscribersCount}
+                            </a>
                         </h3>
                     </div>
                 </div>

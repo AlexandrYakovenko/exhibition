@@ -48,7 +48,8 @@
                             </#if>
 
                             <#if exhibition.author.id == currentUserId>
-                                <a class="col align-self-center btn btn-secondary" href="/user-exhibitions/${exhibition.author.id}?exhibition=${exhibition.id}">
+                                <a class="col align-self-center btn btn-secondary"
+                                   href="/user-exhibitions/${exhibition.author.id}/${exhibition.id}">
                                     <@spring.message "button.edit"/>
                                 </a>
                             </#if>

@@ -1,8 +1,8 @@
-package ua.yakovenko.model.service;
+package ua.yakovenko.service;
 
 import org.springframework.stereotype.Service;
-import ua.yakovenko.model.domain.User;
-import ua.yakovenko.model.repository.UserRepository;
+import ua.yakovenko.domain.entity.User;
+import ua.yakovenko.repository.UserRepository;
 
 @Service
 public class SubscribeService {

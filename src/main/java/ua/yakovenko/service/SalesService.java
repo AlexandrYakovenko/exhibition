@@ -1,11 +1,11 @@
-package ua.yakovenko.model.service;
+package ua.yakovenko.service;
 
 import org.springframework.stereotype.Service;
-import ua.yakovenko.model.domain.Exhibition;
-import ua.yakovenko.model.domain.User;
-import ua.yakovenko.model.exception.BuyException;
-import ua.yakovenko.model.repository.ExhibitionRepository;
-import ua.yakovenko.model.repository.UserRepository;
+import ua.yakovenko.exception.BuyException;
+import ua.yakovenko.domain.entity.Exhibition;
+import ua.yakovenko.domain.entity.User;
+import ua.yakovenko.repository.ExhibitionRepository;
+import ua.yakovenko.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

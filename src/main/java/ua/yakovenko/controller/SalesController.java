@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.yakovenko.model.domain.Exhibition;
-import ua.yakovenko.model.domain.User;
-import ua.yakovenko.model.exception.BuyException;
-import ua.yakovenko.model.service.SalesService;
+import ua.yakovenko.domain.entity.Exhibition;
+import ua.yakovenko.domain.entity.User;
+import ua.yakovenko.exception.BuyException;
+import ua.yakovenko.service.SalesService;
 
 import java.util.List;
 

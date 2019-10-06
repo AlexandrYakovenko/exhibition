@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.yakovenko.model.domain.User;
-import ua.yakovenko.model.service.ProfileService;
+import ua.yakovenko.domain.entity.User;
+import ua.yakovenko.service.ProfileService;
 
 @Controller
 @RequestMapping("/user")

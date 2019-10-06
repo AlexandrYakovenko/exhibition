@@ -1,4 +1,4 @@
-package ua.yakovenko.model.domain;
+package ua.yakovenko.domain.entity;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

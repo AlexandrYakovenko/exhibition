@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.yakovenko.model.domain.Exhibition;
-import ua.yakovenko.model.domain.User;
-import ua.yakovenko.model.service.ExhibitionService;
+import ua.yakovenko.domain.entity.Exhibition;
+import ua.yakovenko.domain.entity.User;
+import ua.yakovenko.service.ExhibitionService;
 
 @Controller
 public class ExhibitionEditController {
@@ -37,6 +37,27 @@ public class ExhibitionEditController {
         model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
         
         model.addAttribute("url", "/user-exhibitions/" + user.getId());
+        model.addAttribute("page", exhibitionService.findByAuthor(user, pageable));
+
+        return "userExhibitions";
+    }
+
+    @GetMapping("/user-exhibitions/{user}/{exhibition}")
+    public String editExhibition (
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable User user,
+            @PathVariable Exhibition exhibition,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+            Model model
+    ) {
+        model.addAttribute("exhibition", exhibition);
+        model.addAttribute("isCurrentUser", currentUser.equals(user));
+        model.addAttribute("userChannel", user);
+        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
+        model.addAttribute("subscribersCount", user.getSubscribers().size());
+        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
+
+        model.addAttribute("url", "/user-exhibitions/" + user.getId() + "/" + exhibition.getId());
         model.addAttribute("page", exhibitionService.findByAuthor(user, pageable));
         model.addAttribute("deleteFactor", true);
 
