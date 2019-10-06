@@ -5,9 +5,9 @@
 
         <button class="btn btn-primary" type="submit">
             <#if user??>
-                Sign Out
+                <@spring.message "nav.link.logout"/>
             <#else>
-                Login
+                <@spring.message "nav.link.login"/>
             </#if>
         </button>
     </form>

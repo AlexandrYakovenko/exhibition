@@ -8,7 +8,8 @@
         </label>
         <div class="col-sm-6">
             <input type="text" name="username" class="form-control ${(usernameError??)?string('is-invalid', '')}"
-                   value="<#if user??>${user.username}</#if>" placeholder="<@spring.message "placeholder.username"/>" />
+                   value="<#if user??>${user.username}</#if>"
+                   placeholder="<@spring.message "placeholder.username"/>" />
             <#if usernameError??>
                 <div class="invalid-feedback">
                     ${usernameError}
@@ -25,11 +26,11 @@
         <div class="col-sm-6">
             <input type="password" name="password" class="form-control ${(passwordError??)?string('is-invalid', '')}"
                    placeholder="<@spring.message "placeholder.password"/>" />
-             <#if passwordError??>
+            <#if passwordError??>
                 <div class="invalid-feedback">
                     ${passwordError}
                 </div>
-             </#if>
+            </#if>
         </div>
     </div>
 
@@ -42,11 +43,11 @@
             <div class="col-sm-6">
                 <input type="password" name="passwordConfirm" class="form-control ${(passwordConfirmError??)?string('is-invalid', '')}"
                        placeholder="<@spring.message "placeholder.password"/>" />
-                 <#if passwordConfirmError??>
+                <#if passwordConfirmError??>
                     <div class="invalid-feedback">
                         ${passwordConfirmError}
                     </div>
-                 </#if>
+                </#if>
             </div>
         </div>
 

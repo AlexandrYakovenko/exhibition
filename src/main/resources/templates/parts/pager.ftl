@@ -3,7 +3,9 @@
         <div class="row">
             <ul class="pagination  col justify-content-center">
                 <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Pages</a>
+                    <a class="page-link" href="#" tabindex="-1">
+                        <@spring.message "pager.label.pages"/>
+                    </a>
                 </li>
                 <#list 1..page.getTotalPages() as p>
                     <#if (p - 1) == page.getNumber()>
