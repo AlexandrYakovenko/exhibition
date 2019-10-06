@@ -1,7 +1,5 @@
 package ua.yakovenko.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +8,30 @@ import ua.yakovenko.domain.entity.User;
 import ua.yakovenko.exception.BuyException;
 import ua.yakovenko.service.ExhibitionService;
 import ua.yakovenko.service.SalesService;
+import ua.yakovenko.service.UserService;
 
 import java.util.List;
 
 @Controller
+@SessionAttributes("exhibitionS")
 public class SalesController {
 
-    @Autowired
+    private static final String BUY_ERROR = "You have already bought this ticket";
+
     private SalesService salesService;
 
-    @Autowired
+    private UserService userService;
+
     private ExhibitionService exhibitionService;
 
-    //TODO переделать без єтой переменной
-    private Long exhibitionId;
+    public SalesController(SalesService salesService,
+                           UserService userService,
+                           ExhibitionService exhibitionService
+    ) {
+        this.salesService = salesService;
+        this.userService = userService;
+        this.exhibitionService = exhibitionService;
+    }
 
     @GetMapping("/sales/{user}")
     public String buyTicket(
@@ -32,46 +40,47 @@ public class SalesController {
             Model model
     ) {
         model.addAttribute("username", user.getUsername());
-        model.addAttribute("money", user.getAccountMoney());
+        model.addAttribute("balance", user.getAccountMoney());
+
+        if (id != null) {
+            Exhibition exhibition = exhibitionService.findById(id);
+            model.addAttribute("exhibition", exhibition);
+
+            if (user.getBoughtTickets().contains(exhibition)) {
+                model.addAttribute("buyError", BUY_ERROR);
+            }
+
+            return "sales";
+        }
+
+        return "redirect:/main";
+    }
+
+    @PostMapping("/sales/{user}")
+    public String updateBalance(
+            @PathVariable User user,
+            @RequestParam(value = "money") Long money,
+            @RequestParam(value = "ex") Long id,
+            Model model
+    ) {
+        if (money != null) {
+            userService.updateUserBalance(user, money);
+        }
+
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("balance", user.getAccountMoney());
 
         Exhibition exhibition = exhibitionService.findById(id);
         model.addAttribute("exhibition", exhibition);
 
         if (user.getBoughtTickets().contains(exhibition)) {
-            model.addAttribute("buyError", "You have already bought this ticket");
+            model.addAttribute("buyError", BUY_ERROR);
         }
-        
+
         return "sales";
     }
 
-    @GetMapping("/sales/addMoney/{user}")
-    public String addMoney(
-            @PathVariable User user,
-            Model model
-    ) {
-        model.addAttribute("user", user);
-
-        return "addMoney";
-    }
-
-    @PostMapping("/sales/addMoney/{user}")
-    public String changeMoney(
-            @PathVariable User user,
-            @RequestParam Long accountMoney,
-            Model model
-    ) {
-        if (accountMoney == null || accountMoney < 1 || accountMoney > 1000) {
-            model.addAttribute("moneyError", "Please, put the amount from 1 to 1000$");
-
-            return "addMoney";
-        }
-
-        salesService.addMoney(user, accountMoney);
-
-        return"redirect:/sales/" + user.getId() + "/" + exhibitionId;
-    }
-
-    @GetMapping("salesUser/{user}")
+    @GetMapping("bought-tickets/{user}")
     public String salesUser(
             @PathVariable User user,
             Model model
@@ -83,21 +92,19 @@ public class SalesController {
     }
 
 
-    @PostMapping("salesUser/{user}")
+    @PostMapping("bought-tickets/{user}")
     public String salesUser(
             @PathVariable User user,
-            @RequestParam Long salesId,
+            @RequestParam Long ticketId,
             Model model
     ) {
         model.addAttribute("user", user);
 
         try {
-            salesService.addTicket(user, salesId);
+            salesService.addTicket(user, ticketId);
         } catch (BuyException e) {
-            //TODO
-           model.addAttribute("buyError", "You have bought this ticket");
 
-            return "redirect:/sales/" + user.getId() + "/" + exhibitionId;
+            return "redirect:/sales/" + user.getId();
         }
 
         List<Exhibition> tickets = salesService.findUserTickets(user);

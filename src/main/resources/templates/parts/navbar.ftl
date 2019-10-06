@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/salesUser/${currentUserId}">
+                    <a class="nav-link" href="/bought-tickets/${currentUserId}">
                         <@spring.message "nav.link.tickets"/>
                     </a>
                 </li>

@@ -12,7 +12,9 @@ import java.util.Optional;
 
 @Service
 public class SalesService {
+
     private final UserRepository userRepository;
+
     private final ExhibitionRepository exhibitionRepository;
 
     public SalesService(UserRepository userRepository, ExhibitionRepository exhibitionRepository) {
@@ -20,26 +22,16 @@ public class SalesService {
         this.exhibitionRepository = exhibitionRepository;
     }
 
-
-    public void addMoney(User user, Long accountMoney) {
-        Long userAccountMoney = user.getAccountMoney();
-        user.setAccountMoney(userAccountMoney + accountMoney);
-    }
-
-    public Optional<Exhibition> findById(Long id) {
-       return exhibitionRepository.findById(id);
-    }
-
-    //TODO сделат красиво
-    public void addTicket(User user, Long salesId) throws BuyException {
-        Exhibition currentTicket = exhibitionRepository.findById(salesId).get();
+    public void addTicket(User user, Long ticketId) throws BuyException {
+        Exhibition currentTicket = exhibitionRepository.findById(ticketId).get();
 
         if (!user.getBoughtTickets().contains(currentTicket)
                 && user.getAccountMoney() >= currentTicket.getPrice()) {
             user.getBoughtTickets().add(currentTicket);
 
-            user.setAccountMoney(
-                    user.getAccountMoney() - currentTicket.getPrice());
+            user.setAccountMoney(user.getAccountMoney() - currentTicket.getPrice());
+
+            userRepository.save(user);
         } else {
             throw new BuyException();
         }

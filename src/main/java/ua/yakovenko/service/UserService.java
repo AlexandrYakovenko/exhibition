@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -42,10 +43,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -59,5 +56,13 @@ public class UserService implements UserDetailsService {
         }
 
         return userRepository.findByUsername(username);
+    }
+
+    public void updateUserBalance(User user, Long money) {
+        Long userBalance = user.getAccountMoney();
+
+        user.setAccountMoney(userBalance + money);
+
+        userRepository.save(user);
     }
 }
