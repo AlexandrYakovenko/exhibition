@@ -28,4 +28,8 @@ public class ExhibitionService {
     public Page<Exhibition> findByAuthor(User user, Pageable pageable) {
         return exhibitionRepository.findByAuthor(user, pageable);
     }
+
+    public void deleteById(Long id) {
+        exhibitionRepository.deleteById(id);
+    }
 }

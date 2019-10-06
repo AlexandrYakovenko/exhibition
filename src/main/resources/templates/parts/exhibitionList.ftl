@@ -31,7 +31,21 @@
                                 ${exhibition.authorName}
                             </a>
 
-                            <p class="col align-self-center"></p>
+                            <#if exhibition.author.id == currentUserId>
+                                <#if deleteFactor??>
+                                <form class="col align-self-center" action="/user-exhibitions/delete" method="post">
+
+                                    <input type="hidden" value="${exhibition.id}" name="exhibitionId">
+
+                                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+
+                                    <button type="submit" class="btn btn-secondary">
+                                        <@spring.message "button.delete"/>
+                                    </button>
+                                </form>
+                                <#else><p class="col align-self-center"></p>
+                                </#if>
+                            </#if>
 
                             <#if exhibition.author.id == currentUserId>
                                 <a class="col align-self-center btn btn-secondary" href="/user-exhibitions/${exhibition.author.id}?exhibition=${exhibition.id}">

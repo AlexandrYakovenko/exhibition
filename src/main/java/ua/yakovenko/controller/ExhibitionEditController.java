@@ -29,8 +29,6 @@ public class ExhibitionEditController {
         @RequestParam(required = false) Exhibition exhibition,
         @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        /*Set<Exhibition> exhibitions = user.getExhibitions();*/
-        /*model.addAttribute("exhibitions", exhibitions);*/
         model.addAttribute("exhibition", exhibition);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
         model.addAttribute("userChannel", user);
@@ -40,12 +38,13 @@ public class ExhibitionEditController {
         
         model.addAttribute("url", "/user-exhibitions/" + user.getId());
         model.addAttribute("page", exhibitionService.findByAuthor(user, pageable));
+        model.addAttribute("deleteFactor", true);
 
         return "userExhibitions";
     }
 
     @PostMapping("/user-exhibitions/{user}")
-    public String updateMessage(
+    public String updateExhibition(
             @AuthenticationPrincipal User currentUser,
             @PathVariable Long user,
             @RequestParam("id") Exhibition exhibition,
@@ -71,5 +70,14 @@ public class ExhibitionEditController {
         }
 
         return "redirect:/user-exhibitions/" + user;
+    }
+
+    @PostMapping("/user-exhibitions/delete")
+    public String deleteExhibition(
+            @RequestParam("exhibitionId") Long id
+    ) {
+        exhibitionService.deleteById(id);
+
+        return "redirect:/main";
     }
 }
