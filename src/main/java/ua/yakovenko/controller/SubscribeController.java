@@ -13,6 +13,7 @@ import ua.yakovenko.service.SubscribeService;
 @Controller
 @RequestMapping("/user")
 public class SubscribeController {
+
     @Autowired
     private SubscribeService subscribeService;
 
@@ -45,7 +46,8 @@ public class SubscribeController {
         model.addAttribute("userChannel", user);
         model.addAttribute("type", type);
 
-        if ("subscriptions".equals(type)) {
+        String subscriptions = "subscriptions";
+        if (subscriptions.equals(type)) {
             model.addAttribute("users", user.getSubscriptions());
         } else {
             model.addAttribute("users", user.getSubscribers());

@@ -14,6 +14,7 @@ import ua.yakovenko.service.ProfileService;
 @Controller
 @RequestMapping("/user")
 public class ProfileController {
+
     @Autowired
     private ProfileService profileService;
 

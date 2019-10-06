@@ -20,9 +20,9 @@ import java.util.Map;
 
 @Controller("/")
 public class RegistrationController {
-    private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 
     private final RegistrationService registrationService;
+
     private final RestTemplate restTemplate;
 
     public RegistrationController(RegistrationService registrationService, RestTemplate restTemplate) {
@@ -47,25 +47,27 @@ public class RegistrationController {
             BindingResult bindingResult,
             Model model
     ) {
+        boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
+        if (isConfirmEmpty) {
+            model.addAttribute("passwordConfirmError", PASSWORD_CONFIRM_ERROR);
+        }
+
+        boolean isConfirmInvalid = user.getPassword() != null && !user.getPassword().equals(passwordConfirm);
+        if (isConfirmInvalid) {
+            model.addAttribute("passwordError", PASSWORD_ERROR);
+        }
+
         String url = String.format(CAPTCHA_URL, secret, captchaResponse);
         CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
-
         if (!response.isSuccess()) {
-            model.addAttribute("captchaError", "Fill captcha");
+            model.addAttribute("captchaError", CAPTCHA_ERROR);
         }
 
-        boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
-        boolean isConfirmInvalid = user.getPassword() != null && !user.getPassword().equals(passwordConfirm);
-
-        if (isConfirmEmpty) {
-            model.addAttribute("passwordConfirmError", "Password confirmation cannot be empty");
-        }
-
-        if (isConfirmInvalid) {
-            model.addAttribute("passwordError", "Passwords are different!");
-        }
-
-        if (isConfirmEmpty || isConfirmInvalid || bindingResult.hasErrors() || !response.isSuccess()) {
+        if (isConfirmEmpty
+                || isConfirmInvalid
+                || bindingResult.hasErrors()
+                || !response.isSuccess()
+        ) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
 
             model.mergeAttributes(errors);
@@ -74,11 +76,21 @@ public class RegistrationController {
         }
 
         if (!registrationService.addUser(user)) {
-            model.addAttribute("usernameError", "User is exists!");
+            model.addAttribute("usernameError", USERNAME_ERROR);
 
             return "registration";
         }
 
         return "redirect:/login";
     }
+
+    private final static String PASSWORD_ERROR = "Passwords are different!";
+
+    private final static String PASSWORD_CONFIRM_ERROR = "Password confirmation cannot be empty";
+
+    private final static String CAPTCHA_ERROR = "Fill captcha";
+
+    private final static String USERNAME_ERROR = "User is exists!";
+
+    private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 }

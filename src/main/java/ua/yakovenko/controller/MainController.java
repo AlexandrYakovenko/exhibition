@@ -39,11 +39,9 @@ public class MainController {
         Page<Exhibition> page;
 
         if(!showroom.isEmpty()) {
-            page =
-                    exhibitionService.findByShowroom(showroom, pageable);
+            page = exhibitionService.findByShowroom(showroom, pageable);
         } else {
-            page =
-                    exhibitionService.findAll(pageable);
+            page = exhibitionService.findAll(pageable);
         }
 
         model.addAttribute("page", page);

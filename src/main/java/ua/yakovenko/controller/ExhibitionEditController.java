@@ -18,6 +18,7 @@ import ua.yakovenko.service.ExhibitionService;
 
 @Controller
 public class ExhibitionEditController {
+
     @Autowired
     private ExhibitionService exhibitionService;
 
@@ -25,9 +26,9 @@ public class ExhibitionEditController {
     public String userExhibitions(
         @AuthenticationPrincipal User currentUser,
         @PathVariable User user,
-        Model model,
         @RequestParam(required = false) Exhibition exhibition,
-        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+        Model model
     ) {
         model.addAttribute("exhibition", exhibition);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
