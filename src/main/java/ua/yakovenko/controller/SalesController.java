@@ -34,10 +34,23 @@ public class SalesController {
 
     @GetMapping("/sales/{user}")
     public String buyTicket(
+            @PathVariable User user
+
+    ) {
+        return REDIRECT + URL_MAIN;
+    }
+
+    @PostMapping("/sales/{user}")
+    public String buyAndUpdate(
             @PathVariable User user,
-            @RequestParam(value = PARAM_EXHB_ID,required = false) Long id,
+            @RequestParam(value = PARAM_MONEY, required = false) Long money,
+            @RequestParam(value = PARAM_EXHB_ID, required = false) Long id,
             Model model
     ) {
+        if (money != null) {
+            userService.updateUserBalance(user, money);
+        }
+
         model.addAttribute(USERNAME, user.getUsername());
         model.addAttribute(BALANCE, user.getAccountMoney());
 
@@ -50,30 +63,6 @@ public class SalesController {
             }
 
             return PAGE_SALES;
-        }
-
-        return REDIRECT + URL_MAIN;
-    }
-
-    @PostMapping("/sales/{user}")
-    public String updateBalance(
-            @PathVariable User user,
-            @RequestParam(value = PARAM_MONEY) Long money,
-            @RequestParam(value = PARAM_EXHB_ID) Long id,
-            Model model
-    ) {
-        if (money != null) {
-            userService.updateUserBalance(user, money);
-        }
-
-        model.addAttribute(USERNAME, user.getUsername());
-        model.addAttribute(BALANCE, user.getAccountMoney());
-
-        Exhibition exhibition = exhibitionService.findById(id);
-        model.addAttribute(EXHIBITION, exhibition);
-
-        if (user.getBoughtTickets().contains(exhibition)) {
-            model.addAttribute(BUY_ERROR, BUY_ERROR_MESSAGE);
         }
 
         return PAGE_SALES;

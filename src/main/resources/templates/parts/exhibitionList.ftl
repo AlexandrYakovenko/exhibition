@@ -21,9 +21,9 @@
                         <h6 class="card-subtitle mb-2 ">
                             <@spring.message "label.date"/>${exhibition.date}
                         </h6>
-                        <form action="/sales/${user.id}" method="get">
+                        <form action="/sales/${user.id}" method="post">
                             <input type="hidden" value="${exhibition.id}" name="exhibitionId">
-                            <#--<input type="hidden" name="_csrf" value="${_csrf.token}" />-->
+                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
                             <button type="submit" class="btn btn-link">
                                 <@spring.message "button.buy_ticket"/>
                             </button>
