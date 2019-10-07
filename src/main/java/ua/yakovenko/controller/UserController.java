@@ -15,7 +15,7 @@ import ua.yakovenko.service.UserService;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(USER_MAPPING)
 @PreAuthorize("hasAuthority('SUPER_ADMIN')")
 public class UserController {
 
@@ -31,7 +31,7 @@ public class UserController {
         return PAGE_USER_LIST;
     }
 
-    @GetMapping("{user}")
+    @GetMapping(USER_EDIT_MAPPING)
     public String userEdit(
             @PathVariable User user,
             Model model

@@ -103,4 +103,36 @@ public interface Constants {
     String PAGE_USER_EDIT = "userEdit";
 
     String PARAM_USER_ID = "userId";
+
+    String USER_EXHIBITIONS_MAPPING = "/user-exhibitions/{user}";
+
+    String EDIT_EXHIBITION_MAPPING = "/user-exhibitions/{user}/{exhibition}";
+
+    String UPDATE_EXHIBITION_MAPPING = "/user-exhibitions/{user}";
+
+    String DELETE_EXHIBITION_MAPPING = "/user-exhibitions/delete";
+
+    String MAIN_MAPPING = "/";
+
+    String MAIN_FORM_MAPPING = "/main";
+
+    String USER_MAPPING = "/user";
+
+    String PROFILE_MAPPING = "/profile";
+
+    String REGISTRATION_MAPPING = "registration";
+
+    String RECAPTCHA_SECRET_VALUE = "${recaptcha.secret}" ;
+
+    String BUY_TICKET_MAPPING = "/sales/{user}";
+
+    String BOUGHT_TICKETS_MAPPING = "bought-tickets/{user}" ;
+
+    String SUBSCRIBE_MAPPING = "subscribe/{user}" ;
+
+    String UNSUBSCRIBE_MAPPING = "unsubscribe/{user}" ;
+
+    String USER_LIST_MAPPING =  "{type}/{user}/list";
+
+    String USER_EDIT_MAPPING = "{user}"  ;
 }

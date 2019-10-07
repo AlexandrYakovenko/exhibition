@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Map;
 
-@Controller("/")
+@Controller(MAIN_MAPPING)
 public class RegistrationController {
 
     private final RegistrationService registrationService;
@@ -32,15 +32,15 @@ public class RegistrationController {
         this.restTemplate = restTemplate;
     }
 
-    @Value("${recaptcha.secret}")
+    @Value(RECAPTCHA_SECRET_VALUE)
     private String secret;
 
-    @GetMapping("registration")
+    @GetMapping(REGISTRATION_MAPPING)
     public String registration() {
         return PAGE_REGISTRATION;
     }
 
-    @PostMapping("registration")
+    @PostMapping(REGISTRATION_MAPPING)
     public String addUser(
             @RequestParam String passwordConfirm,
             @RequestParam(G_RECAPTCHA_RESPONSE) String captchaResponse,

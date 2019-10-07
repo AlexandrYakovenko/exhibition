@@ -14,13 +14,13 @@ import ua.yakovenko.domain.entity.User;
 import ua.yakovenko.service.ProfileService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(USER_MAPPING)
 public class ProfileController {
 
     @Autowired
     private ProfileService profileService;
 
-    @GetMapping("/profile")
+    @GetMapping(PROFILE_MAPPING)
     public String profile(
             @AuthenticationPrincipal User user,
             Model model
@@ -30,7 +30,7 @@ public class ProfileController {
         return PAGE_PROFILE;
     }
 
-    @PostMapping("/profile")
+    @PostMapping(PROFILE_MAPPING)
     public String profile(
             @AuthenticationPrincipal User user,
             @RequestParam String username,

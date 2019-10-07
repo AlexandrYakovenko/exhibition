@@ -24,7 +24,7 @@ public class ExhibitionEditController {
     @Autowired
     private ExhibitionService exhibitionService;
 
-    @GetMapping("/user-exhibitions/{user}")
+    @GetMapping(USER_EXHIBITIONS_MAPPING)
     public String userExhibitions(
         @AuthenticationPrincipal User currentUser,
         @PathVariable User user,
@@ -45,7 +45,7 @@ public class ExhibitionEditController {
         return PAGE_USER_EXHIBITIONS;
     }
 
-    @GetMapping("/user-exhibitions/{user}/{exhibition}")
+    @GetMapping(EDIT_EXHIBITION_MAPPING)
     public String editExhibition (
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user,
@@ -67,7 +67,7 @@ public class ExhibitionEditController {
         return PAGE_USER_EXHIBITIONS;
     }
 
-    @PostMapping("/user-exhibitions/{user}")
+    @PostMapping(UPDATE_EXHIBITION_MAPPING)
     public String updateExhibition(
             @AuthenticationPrincipal User currentUser,
             @PathVariable Long user,
@@ -95,7 +95,7 @@ public class ExhibitionEditController {
         return REDIRECT + URL_USER_EXHIBITIONS + user;
     }
 
-    @PostMapping("/user-exhibitions/delete")
+    @PostMapping(DELETE_EXHIBITION_MAPPING)
     public String deleteExhibition(
             @RequestParam(PARAM_EXHB_ID) Long id
     ) {

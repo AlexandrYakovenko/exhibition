@@ -27,12 +27,12 @@ public class MainController {
     @Autowired
     private ExhibitionService exhibitionService;
 
-    @GetMapping("/")
+    @GetMapping(MAIN_MAPPING)
     public String mainPage() {
         return PAGE_HOME;
     }
 
-    @GetMapping("/main")
+    @GetMapping(MAIN_FORM_MAPPING)
     public String mainForm(
             @RequestParam(required = false, defaultValue = "") String showroom,
             Model model,
@@ -53,7 +53,7 @@ public class MainController {
         return PAGE_MAIN_PAGE;
     }
 
-    @PostMapping("/main")
+    @PostMapping(MAIN_FORM_MAPPING)
     public String add(
             @AuthenticationPrincipal User user,
             @Valid Exhibition exhibition,

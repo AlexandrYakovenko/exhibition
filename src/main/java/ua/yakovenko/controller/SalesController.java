@@ -32,7 +32,7 @@ public class SalesController {
         this.exhibitionService = exhibitionService;
     }
 
-    @GetMapping("/sales/{user}")
+    @GetMapping(BUY_TICKET_MAPPING)
     public String buyTicket(
             @PathVariable User user
 
@@ -40,7 +40,7 @@ public class SalesController {
         return REDIRECT + URL_MAIN;
     }
 
-    @PostMapping("/sales/{user}")
+    @PostMapping(BUY_TICKET_MAPPING)
     public String buyAndUpdate(
             @PathVariable User user,
             @RequestParam(value = PARAM_MONEY, required = false) Long money,
@@ -68,7 +68,7 @@ public class SalesController {
         return PAGE_SALES;
     }
 
-    @GetMapping("bought-tickets/{user}")
+    @GetMapping(BOUGHT_TICKETS_MAPPING)
     public String salesUser(
             @PathVariable User user,
             Model model
@@ -80,7 +80,7 @@ public class SalesController {
     }
 
 
-    @PostMapping("bought-tickets/{user}")
+    @PostMapping(BOUGHT_TICKETS_MAPPING)
     public String salesUser(
             @PathVariable User user,
             @RequestParam Long ticketId,

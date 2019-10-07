@@ -13,13 +13,13 @@ import ua.yakovenko.domain.entity.User;
 import ua.yakovenko.service.SubscribeService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(USER_MAPPING)
 public class SubscribeController {
 
     @Autowired
     private SubscribeService subscribeService;
 
-    @GetMapping("subscribe/{user}")
+    @GetMapping(SUBSCRIBE_MAPPING)
     public String subscribe(
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user
@@ -29,7 +29,7 @@ public class SubscribeController {
         return REDIRECT + URL_USER_EXHIBITIONS + user.getId();
     }
 
-    @GetMapping("unsubscribe/{user}")
+    @GetMapping(UNSUBSCRIBE_MAPPING)
     public String unsubscribe(
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user
@@ -39,7 +39,7 @@ public class SubscribeController {
         return REDIRECT + URL_USER_EXHIBITIONS + user.getId();
     }
 
-    @GetMapping("{type}/{user}/list")
+    @GetMapping(USER_LIST_MAPPING)
     public String userList(
             Model model,
             @PathVariable User user,
