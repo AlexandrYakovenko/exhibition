@@ -134,5 +134,7 @@ public interface Constants {
 
     String USER_LIST_MAPPING =  "{type}/{user}/list";
 
-    String USER_EDIT_MAPPING = "{user}"  ;
+    String USER_EDIT_MAPPING = "{user}";
+
+    String BUY_ERROR_MONEY = "Not enough money!";
 }

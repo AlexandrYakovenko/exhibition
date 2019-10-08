@@ -89,9 +89,18 @@ public class SalesController {
         model.addAttribute(USER, user);
 
         try {
+
             salesService.addTicket(user, ticketId);
+
         } catch (BuyException e) {
-            return REDIRECT + URL_SALES + user.getId();
+            model.addAttribute(BUY_ERROR, BUY_ERROR_MONEY);
+            model.addAttribute(USERNAME, user.getUsername());
+            model.addAttribute(BALANCE, user.getAccountMoney());
+
+            Exhibition exhibition = exhibitionService.findById(ticketId);
+            model.addAttribute(EXHIBITION, exhibition);
+
+            return PAGE_SALES;
         }
 
         List<Exhibition> tickets = salesService.findUserTickets(user);
